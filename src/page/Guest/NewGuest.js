@@ -10,6 +10,7 @@ const NewGuest = () => {
   const [relation, setRelation] = useState("Mbak Eqi");
   const [isVIP, setIsVIP] = useState(false);
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,6 +42,10 @@ const NewGuest = () => {
     };
     console.log("New Guest:", newGuest);
     newguest(newGuest);
+    setSuccessMessage("Data successfully added!");
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 3000);
     // Call your function to submit the form data
     // submitForm(newGuest);
   };
@@ -48,6 +53,11 @@ const NewGuest = () => {
     <div className="flex flex-row">
       <VerticalNavigation />
       <div className="p-8 ml-8">
+        {successMessage && (
+          <div className="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 px-4 py-2 bg-green-500 text-white rounded">
+            {successMessage}
+          </div>
+        )}
         <div className="mb-8">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             Informasi Tamu
@@ -68,7 +78,7 @@ const NewGuest = () => {
                   type="text"
                   autoComplete="given-name"
                   onChange={handleInputChange}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 {errors.name && (
                   <p className="text-red-600 text-sm mt-2">{errors.name}</p>
@@ -86,7 +96,7 @@ const NewGuest = () => {
                   type="text"
                   autoComplete="given-name"
                   onChange={handleInputChange}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 {errors.address && (
                   <p className="text-red-600 text-sm mt-2">{errors.address}</p>
@@ -107,7 +117,7 @@ const NewGuest = () => {
                   name="origin"
                   type="text"
                   onChange={handleInputChange}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -125,7 +135,7 @@ const NewGuest = () => {
                   name="relation"
                   autoComplete="country-name"
                   onChange={handleInputChange}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                  className="block w-full p-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
                   <option>Mbak Eqi</option>
                   <option>Mas Sigit</option>
