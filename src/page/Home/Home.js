@@ -9,11 +9,10 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Button,
+  Typography,
 } from "@mui/material";
-import { findGuest, getInvitationList, UpdateCheckIn } from "./action";
-import { Input } from "@material-tailwind/react";
-
+import { findGuest, UpdateCheckIn } from "./action";
+import finish from "../../icon/finish.png";
 const Home = () => {
   const [invitationList, setInvitationList] = useState([]);
   const [open, setOpen] = useState(false);
@@ -103,14 +102,38 @@ const Home = () => {
           </div>
         </div>
 
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table
+          sx={{ minWidth: 650 }}
+          aria-label="simple table"
+          className="mt-8"
+        >
           <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Guest Category</TableCell>
-              <TableCell>Asal</TableCell>
-              <TableCell>Jabatan/Kota</TableCell>
-              <TableCell>Status</TableCell>
+            <TableRow className="bg-gray-100">
+              <TableCell>
+                <Typography variant="body1" fontWeight="bold">
+                  Name
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="body1" fontWeight="bold">
+                  Guest Category
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="body1" fontWeight="bold">
+                  Asal
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="body1" fontWeight="bold">
+                  Jabatan/Kota
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="body1" fontWeight="bold">
+                  Status
+                </Typography>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -144,66 +167,86 @@ const Home = () => {
           </TableBody>
         </Table>
 
-        <Dialog open={open} onClose={handleClose}>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          sx={{ "& .MuiDialog-paper": { width: "60%", maxWidth: "none" } }}
+        >
           <DialogTitle>
             <h1>Check In Confirmation</h1>
           </DialogTitle>
           <DialogContent>
             {selectedRow && (
               <div>
-                <div className="mt-2 border-t border-gray-100">
-                  <dl className="divide-y divide-gray-100">
-                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                      <dt className="text-sm font-medium leading-6 text-gray-900">
-                        Nama Tamu
-                      </dt>
-                      <dd className="mt-1 text-m font-extrabold leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                        {selectedRow.nama}
-                      </dd>
-                    </div>
-                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                      <dt className="text-sm font-medium leading-6 text-gray-900">
-                        Origin
-                      </dt>
-                      <dd className="mt-1 text-m font-extrabold leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                        {selectedRow.kategori}
-                      </dd>
-                    </div>
-                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                      <dt className="text-sm font-medium leading-6 text-gray-900">
-                        Priority
-                      </dt>
-                      <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                        {selectedRow.guestCategory === "VIP" ? (
-                          <p className="mt-1 text-m  text-gray-700  bg-yellow-300 p-4 rounded-lg font-bold">
-                            VIP
-                          </p>
-                        ) : (
-                          <p className="mt-1 text-sm text-gray-700  bg-gray-300 p-4 rounded-lg font-bold">
-                            Regular
-                          </p>
-                        )}
-                      </dd>
-                    </div>
-                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                      <dt className="text-sm font-medium leading-6 text-gray-900">
-                        Check In Status
-                      </dt>
-                      <dd className="mt-1 text-m font-extrabold leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                        {selectedRow.isCheckIn == true ? (
-                          <p className="mt-1 text-m  text-white  bg-red-600 p-4 rounded-lg font-bold">
-                            Already Check In
-                          </p>
-                        ) : (
-                          <p className="mt-1 text-m  text-white  bg-green-500 p-4 rounded-lg font-bold">
-                            Not Yet Check In
-                          </p>
-                        )}
-                      </dd>
-                    </div>
-                  </dl>
+                <div className="flex flex-2 flex-col gap-6">
+                  <div className="flex flex-col justify-center items-center">
+                    <img
+                      src={finish}
+                      alt="finish"
+                      className="object-contain h-max w-32"
+                    />
+                    <h1 className="text-xl font-bold text-green-600 mt-4">
+                      Check In
+                    </h1>
+                    <p className="text-lg font-semibold text-green-600">
+                      Apakah anda yakin untuk melakukan Check In?
+                    </p>
+                  </div>
+
+                  <h2 className="font-semibold text-xl capitalize">
+                    {selectedRow.nama}
+                  </h2>
+                  <div className="flex justify-between gap-5 w-full text-right items-center">
+                    <h4 className="text-gray-500 capitalize">Category</h4>
+
+                    {selectedRow.guestCategory === "VIP" ? (
+                      <p className=" text-gray-700 bg-yellow-300 p-2 rounded-lg font-bold px-4 ">
+                        VIP
+                      </p>
+                    ) : (
+                      <p className=" text-gray-700 bg-gray-300 p-2 rounded-lg font-bold px-4 ">
+                        Regular
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex justify-between gap-5 w-full text-right">
+                    <h4 className="text-gray-500 capitalize">Sesi</h4>
+                    <p className="text-black-100 font-semibold capitalize">
+                      {selectedRow.sesi}
+                    </p>
+                  </div>
+                  <div className="flex justify-between gap-5 w-full text-right">
+                    <h4 className="text-gray-500 capitalize">Jabatan / Kota</h4>
+                    <p className=" text-black-100 font-semibold capitalize">
+                      {selectedRow.jabatan_kota}
+                    </p>
+                  </div>
+                  <div className="flex justify-between gap-5 w-full text-right">
+                    <h4 className="text-gray-500 capitalize">Kategori</h4>
+                    <p className=" text-black-100 font-semibold capitalize">
+                      {selectedRow.kategori}
+                    </p>
+                  </div>
+                  <div className="flex justify-between gap-5 w-full text-right">
+                    <h4 className="text-gray-500 capitalize">Relasi</h4>
+                    <p className=" text-black-100 font-semibold capitalize">
+                      {selectedRow.relasi}
+                    </p>
+                  </div>
+                  <div className="flex justify-between gap-5 w-full text-right items-center">
+                    <h4 className="text-gray-500 capitalize">Status</h4>
+                    {selectedRow.isCheckIn == true ? (
+                      <p className="  text-white  bg-red-600 p-2 rounded-lg font-bold">
+                        Already Check In
+                      </p>
+                    ) : (
+                      <p className=" text-white  bg-green-500 p-2 rounded-lg font-bold">
+                        Not Yet Check In
+                      </p>
+                    )}
+                  </div>
                 </div>
-                <div class="mb-4">
+                <div class="gap-5 w-full text-left mt-4">
                   <label
                     class="block text-gray-700 text-sm font-bold mb-2"
                     for="person-count"
