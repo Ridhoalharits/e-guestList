@@ -6,7 +6,7 @@ export async function newguest(inputdata) {
   );
   try {
     const { data, error } = await supabase
-      .from("invitation")
+      .from("guestlist")
       .insert([inputdata])
       .select();
 

@@ -58,8 +58,10 @@ const DaftarTamu = () => {
   };
   return (
     <div className="flex flex-row">
-      <VerticalNavigation />
-      <div className="p-4">
+      <div className="fixed h-screen w-64 bg-white shadow-lg shadow-blue-gray-900/5">
+        <VerticalNavigation />
+      </div>
+      <div className="ml-64 flex-1 p-4 ">
         <div>
           <h3>Daftar Tamu</h3>
           <div className="mt-6 flex max-w-md gap-x-4">
@@ -88,10 +90,10 @@ const DaftarTamu = () => {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
-              <TableCell>Origin</TableCell>
-              <TableCell>VIP</TableCell>
-              <TableCell>Check In Status</TableCell>
-              <TableCell>Person</TableCell>
+              <TableCell>Guest Category</TableCell>
+              <TableCell>Asal</TableCell>
+              <TableCell>Jabatan/Kota</TableCell>
+              <TableCell>Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -103,15 +105,23 @@ const DaftarTamu = () => {
                 style={{ cursor: "pointer" }}
                 onClick={() => handleClickOpen(row)}
               >
-                <TableCell>{row.Name}</TableCell>
-                <TableCell>{row.Origin}</TableCell>
+                <TableCell>{row.nama}</TableCell>
                 <TableCell>
-                  {row.isVIP == true ? <>VIP</> : <>Non-VIP</>}
+                  {row.guestCategory == "VIP" ? (
+                    <p className="mt-1 text-m text-gray-700 bg-yellow-300 p-4 rounded-lg font-bold flex justify-center items-center">
+                      VIP
+                    </p>
+                  ) : (
+                    <p className="mt-1 text-m text-gray-700 bg-gray-300 p-4 rounded-lg font-bold flex justify-center items-center">
+                      Non-VIP
+                    </p>
+                  )}
                 </TableCell>
+                <TableCell>{row.kategori}</TableCell>
+                <TableCell>{row.jabatan_kota}</TableCell>
                 <TableCell>
                   {row.isCheckIn == true ? <>Checked In</> : <>Not Check In</>}
                 </TableCell>
-                <TableCell>{row.GuestQty}</TableCell>
               </TableRow>
             ))}
           </TableBody>

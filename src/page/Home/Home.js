@@ -107,10 +107,10 @@ const Home = () => {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
-              <TableCell>Origin</TableCell>
-              <TableCell>VIP</TableCell>
-              <TableCell>Check In Status</TableCell>
-              <TableCell>Person</TableCell>
+              <TableCell>Guest Category</TableCell>
+              <TableCell>Asal</TableCell>
+              <TableCell>Jabatan/Kota</TableCell>
+              <TableCell>Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -122,15 +122,23 @@ const Home = () => {
                 style={{ cursor: "pointer" }}
                 onClick={() => handleClickOpen(row)}
               >
-                <TableCell>{row.Name}</TableCell>
-                <TableCell>{row.Origin}</TableCell>
+                <TableCell>{row.nama}</TableCell>
                 <TableCell>
-                  {row.isVIP == true ? <>VIP</> : <>Non-VIP</>}
+                  {row.guestCategory == "VIP" ? (
+                    <p className="mt-1 text-m text-gray-700 bg-yellow-300 p-4 rounded-lg font-bold flex justify-center items-center">
+                      VIP
+                    </p>
+                  ) : (
+                    <p className="mt-1 text-m text-gray-700 bg-gray-300 p-4 rounded-lg font-bold flex justify-center items-center">
+                      Non-VIP
+                    </p>
+                  )}
                 </TableCell>
+                <TableCell>{row.kategori}</TableCell>
+                <TableCell>{row.jabatan_kota}</TableCell>
                 <TableCell>
                   {row.isCheckIn == true ? <>Checked In</> : <>Not Check In</>}
                 </TableCell>
-                <TableCell>{row.GuestQty}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -150,7 +158,7 @@ const Home = () => {
                         Nama Tamu
                       </dt>
                       <dd className="mt-1 text-m font-extrabold leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                        {selectedRow.Name}
+                        {selectedRow.nama}
                       </dd>
                     </div>
                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -158,7 +166,7 @@ const Home = () => {
                         Origin
                       </dt>
                       <dd className="mt-1 text-m font-extrabold leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                        {selectedRow.Origin}
+                        {selectedRow.kategori}
                       </dd>
                     </div>
                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -166,13 +174,13 @@ const Home = () => {
                         Priority
                       </dt>
                       <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                        {selectedRow.isVIP === true ? (
+                        {selectedRow.guestCategory === "VIP" ? (
                           <p className="mt-1 text-m  text-gray-700  bg-yellow-300 p-4 rounded-lg font-bold">
                             VIP
                           </p>
                         ) : (
                           <p className="mt-1 text-sm text-gray-700  bg-gray-300 p-4 rounded-lg font-bold">
-                            Non-VIP
+                            Regular
                           </p>
                         )}
                       </dd>

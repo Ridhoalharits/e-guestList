@@ -5,7 +5,7 @@ export async function getInvitationList() {
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp3ZWZ0amdlbHJ1dGZvZXJ6bm1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTM0MjYyMjMsImV4cCI6MjAyOTAwMjIyM30.PGKnIzXI1T4YQVfNqxuOnL7cASslx40XOZJc0UHtDZo"
   );
   try {
-    let query = supabase.from("invitation").select("*");
+    let query = supabase.from("guestlist").select("*");
     const { data, error } = await query;
     if (error) {
       throw error;
@@ -27,8 +27,8 @@ export async function UpdateCheckIn(row, person) {
   );
   try {
     const { data, error } = await supabase
-      .from("invitation")
-      .update({ isCheckIn: true, GuestQty: person })
+      .from("guestlist")
+      .update({ isCheckIn: true, pax: person })
       .eq("guestID", row.guestID);
 
     if (data) {
@@ -48,9 +48,9 @@ export async function findGuest(name) {
   );
   try {
     const { data, error } = await supabase
-      .from("invitation")
+      .from("guestlist")
       .select("*")
-      .ilike("Name", `%${name}%`);
+      .ilike("nama", `%${name}%`);
 
     if (data) {
       console.log("Successfully delete data");
