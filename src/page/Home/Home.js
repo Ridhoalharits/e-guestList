@@ -11,14 +11,18 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+
 import { findGuest, UpdateCheckIn } from "./action";
 import finish from "../../icon/finish.png";
+import QRModal from "../../components/QRModal";
+
 const Home = () => {
   const [invitationList, setInvitationList] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
   const [person, setPerson] = useState(0);
   const [name, setName] = useState("");
+  const [qrOpen, setQrOpen] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -71,6 +75,14 @@ const Home = () => {
     setPerson(event);
     console.log(event);
   };
+
+  const handleQRDialog = () => {
+    setQrOpen(true);
+  };
+
+  const handleQRClose = () => {
+    setQrOpen(false);
+  };
   console.log("ini hasil", invitationList);
   return (
     <div className="flex flex-row">
@@ -98,6 +110,13 @@ const Home = () => {
               className="flex-none rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
               Find Guest
+            </button>
+            <button
+              type="submit"
+              onClick={handleQRDialog}
+              className="flex-none rounded-md bg-green-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            >
+              Scan QR
             </button>
           </div>
         </div>
@@ -147,12 +166,12 @@ const Home = () => {
               >
                 <TableCell>{row.nama}</TableCell>
                 <TableCell>
-                  {row.guestCategory == "VIP" ? (
-                    <p className="mt-1 text-m text-gray-700 bg-yellow-300 p-4 rounded-lg font-bold flex justify-center items-center">
+                  {row.guestCategory === "VIP" ? (
+                    <p className="mt-1 text-m text-gray-700 bg-yellow-300 p-2 rounded-lg font-bold flex justify-center items-center">
                       VIP
                     </p>
                   ) : (
-                    <p className="mt-1 text-m text-gray-700 bg-gray-300 p-4 rounded-lg font-bold flex justify-center items-center">
+                    <p className="mt-1 text-m text-gray-700 bg-gray-300 p-2 rounded-lg font-bold flex justify-center items-center">
                       Non-VIP
                     </p>
                   )}
@@ -160,7 +179,15 @@ const Home = () => {
                 <TableCell>{row.kategori}</TableCell>
                 <TableCell>{row.jabatan_kota}</TableCell>
                 <TableCell>
-                  {row.isCheckIn == true ? <>Checked In</> : <>Not Check In</>}
+                  {row.isCheckIn === true ? (
+                    <p className="mt-1 text-m text-white bg-red-800 p-2 rounded-lg font-bold flex justify-center items-center">
+                      Checked In
+                    </p>
+                  ) : (
+                    <p className="mt-1 text-m text-white bg-blue-500 p-2 rounded-lg font-bold flex justify-center items-center">
+                      Not Check In
+                    </p>
+                  )}
                 </TableCell>
               </TableRow>
             ))}
@@ -235,7 +262,7 @@ const Home = () => {
                   </div>
                   <div className="flex justify-between gap-5 w-full text-right items-center">
                     <h4 className="text-gray-500 capitalize">Status</h4>
-                    {selectedRow.isCheckIn == true ? (
+                    {selectedRow.isCheckIn === true ? (
                       <p className="  text-white  bg-red-600 p-2 rounded-lg font-bold">
                         Already Check In
                       </p>
@@ -281,6 +308,8 @@ const Home = () => {
             </div>
           </DialogContent>
         </Dialog>
+
+        {/* {qrOpen && <QRModal open={qrOpen} onClose={handleQRClose} />} */}
       </div>
     </div>
   );
