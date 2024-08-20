@@ -25,6 +25,11 @@ const VerticalNavigation = () => {
       icon: "http://www.w3.org/2000/svg",
       link: "/newguest",
     },
+    {
+      name: "Statistic",
+      icon: "http://www.w3.org/2000/svg",
+      link: "/statistic",
+    },
   ];
 
   async function signOut() {

@@ -7,7 +7,7 @@ const NewGuest = () => {
   const [Name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [Origin, setOrigin] = useState("");
-  const [relation, setRelation] = useState("Mbak Eqi");
+  const [relation, setRelation] = useState("TAMU BAPAK CPP");
   const [isVIP, setIsVIP] = useState(false);
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
@@ -34,11 +34,11 @@ const NewGuest = () => {
       return;
     }
     const newGuest = {
-      Name,
-      // address,
-      Origin,
-      // relation,
-      isVIP,
+      nama: Name,
+      alamat: address,
+      instansiKeluarga: Origin,
+      relasi: relation,
+      tambahan: true,
     };
     console.log("New Guest:", newGuest);
     newguest(newGuest);
@@ -111,7 +111,7 @@ const NewGuest = () => {
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Asal
+                Instansi / Keluarga
               </label>
               <div className="mt-2">
                 <input
@@ -140,8 +140,12 @@ const NewGuest = () => {
                   onChange={handleInputChange}
                   className="block w-full p-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
-                  <option>Mbak Eqi</option>
-                  <option>Mas Sigit</option>
+                  <option>TAMU IBU CPP</option>
+                  <option>TAMU BAPAK CPP</option>
+                  <option>TAMU IBU CPW</option>
+                  <option>TAMU BAPAK CPW</option>
+                  <option>KERABAT CPP</option>
+                  <option>KERABAT CPP</option>
                 </select>
               </div>
             </div>

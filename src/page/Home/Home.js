@@ -14,7 +14,7 @@ import {
 import { Box, CssBaseline, Fab } from "@mui/material";
 
 import { findGuest, UpdateCheckIn, findGuestQR } from "./action";
-import finish from "../../icon/finish.png";
+import finish from "../../icon/caution.png";
 
 import QrScanner from "qr-scanner";
 let stopScan = false;
@@ -135,10 +135,12 @@ const Home = () => {
   console.log("ini hasil", invitationList);
   return (
     <div className="flex flex-row">
-      <VerticalNavigation />
-      <div className="p-4">
+      <div className="fixed h-screen w-64 bg-white shadow-lg shadow-blue-gray-900/5">
+        <VerticalNavigation />
+      </div>
+      <div className="ml-64 flex-1 p-4 pr-12">
         <div>
-          <h3>Cari Disini</h3>
+          <h1 className="font-bold">Home</h1>
           <div className="mt-6 flex max-w-lg gap-x-4">
             <label htmlFor="email-address" className="sr-only">
               Find the guest
@@ -186,12 +188,12 @@ const Home = () => {
               </TableCell>
               <TableCell>
                 <Typography variant="body1" fontWeight="bold">
-                  Asal
+                  Instansi / Keluarga
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography variant="body1" fontWeight="bold">
-                  Jabatan/Kota
+                  Alamat
                 </Typography>
               </TableCell>
               <TableCell>
@@ -222,8 +224,8 @@ const Home = () => {
                     </p>
                   )}
                 </TableCell>
-                <TableCell>{row.kategori}</TableCell>
-                <TableCell>{row.jabatan_kota}</TableCell>
+                <TableCell>{row.instansiKeluarga}</TableCell>
+                <TableCell>{row.alamat}</TableCell>
                 <TableCell>
                   {row.isCheckIn === true ? (
                     <p className="mt-1 text-m text-white bg-red-800 p-2 rounded-lg font-bold flex justify-center items-center">
@@ -246,7 +248,7 @@ const Home = () => {
           sx={{ "& .MuiDialog-paper": { width: "60%", maxWidth: "none" } }}
         >
           <DialogTitle>
-            <h1>Check In Confirmation</h1>
+            <h1 className="font-bold">Check In Confirmation</h1>
           </DialogTitle>
           <DialogContent>
             {selectedRow && (
@@ -258,10 +260,10 @@ const Home = () => {
                       alt="finish"
                       className="object-contain h-max w-32"
                     />
-                    <h1 className="text-xl font-bold text-green-600 mt-4">
+                    <h1 className="text-xl font-bold text-yellow-400 mt-4">
                       Check In
                     </h1>
-                    <p className="text-lg font-semibold text-green-600">
+                    <p className="text-lg font-semibold">
                       Apakah anda yakin untuk melakukan Check In?
                     </p>
                   </div>
@@ -282,22 +284,19 @@ const Home = () => {
                       </p>
                     )}
                   </div>
+
                   <div className="flex justify-between gap-5 w-full text-right">
-                    <h4 className="text-gray-500 capitalize">Sesi</h4>
-                    <p className="text-black-100 font-semibold capitalize">
-                      {selectedRow.sesi}
+                    <h4 className="text-gray-500 capitalize">
+                      Instansi / Keluarga
+                    </h4>
+                    <p className=" text-black-100 font-semibold capitalize">
+                      {selectedRow.instansiKeluarga}
                     </p>
                   </div>
                   <div className="flex justify-between gap-5 w-full text-right">
-                    <h4 className="text-gray-500 capitalize">Jabatan / Kota</h4>
+                    <h4 className="text-gray-500 capitalize">Alamat</h4>
                     <p className=" text-black-100 font-semibold capitalize">
-                      {selectedRow.jabatan_kota}
-                    </p>
-                  </div>
-                  <div className="flex justify-between gap-5 w-full text-right">
-                    <h4 className="text-gray-500 capitalize">Kategori</h4>
-                    <p className=" text-black-100 font-semibold capitalize">
-                      {selectedRow.kategori}
+                      {selectedRow.alamat}
                     </p>
                   </div>
                   <div className="flex justify-between gap-5 w-full text-right">
@@ -361,14 +360,14 @@ const Home = () => {
           sx={{ "& .MuiDialog-paper": { width: "60%", maxWidth: "none" } }}
         >
           <DialogTitle>
-            <h1>Check In Confirmation</h1>
+            <h1 className="text-2xl font-bold">Scan QR Code Below</h1>
           </DialogTitle>
           <DialogContent>
             <div>
               <Box
                 sx={{
                   flexDirection: "row",
-                  paddingTop: "64px",
+                  paddingTop: "16px",
                 }}
               >
                 {!btnScan && (
