@@ -13,10 +13,11 @@ import {
 } from "@mui/material";
 import { Box, CssBaseline, Fab } from "@mui/material";
 
-import { findGuest, UpdateCheckIn, findGuestQR } from "./action";
+import { findGuest, UpdateCheckIn, findGuestQR, formatedTime } from "./action";
 import finish from "../../icon/caution.png";
 
 import QrScanner from "qr-scanner";
+import Statistic from "../Statistic/Statistic";
 let stopScan = false;
 let hasilScan = "";
 
@@ -82,6 +83,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchData();
+    console.log(invitationList);
   }, []);
 
   const handleCheckin = async (id, person) => {
@@ -140,6 +142,7 @@ const Home = () => {
       </div>
       <div className="ml-64 flex-1 p-4 pr-12">
         <div>
+          <Statistic />
           <h1 className="font-bold">Home</h1>
           <div className="mt-6 flex max-w-lg gap-x-4">
             <label htmlFor="email-address" className="sr-only">
@@ -201,6 +204,11 @@ const Home = () => {
                   Status
                 </Typography>
               </TableCell>
+              <TableCell>
+                <Typography variant="body1" fontWeight="bold">
+                  Check In Time
+                </Typography>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -235,6 +243,13 @@ const Home = () => {
                     <p className="mt-1 text-m text-white bg-blue-500 p-2 rounded-lg font-bold flex justify-center items-center">
                       Not Check In
                     </p>
+                  )}
+                </TableCell>
+                <TableCell>
+                  {row.checkInTime === null ? (
+                    <p>-</p>
+                  ) : (
+                    formatedTime(row.checkInTime)
                   )}
                 </TableCell>
               </TableRow>

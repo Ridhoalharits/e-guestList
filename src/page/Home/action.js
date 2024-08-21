@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { format } from "date-fns";
 export async function getInvitationList() {
   const supabase = createClient(
     "https://jweftjgelrutfoerznmb.supabase.co",
@@ -26,9 +27,10 @@ export async function UpdateCheckIn(row, person) {
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp3ZWZ0amdlbHJ1dGZvZXJ6bm1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTM0MjYyMjMsImV4cCI6MjAyOTAwMjIyM30.PGKnIzXI1T4YQVfNqxuOnL7cASslx40XOZJc0UHtDZo"
   );
   try {
+    const timestamp = new Date();
     const { data, error } = await supabase
       .from("guestlist")
-      .update({ isCheckIn: true, pax: person })
+      .update({ isCheckIn: true, pax: person, checkInTime: timestamp })
       .eq("guestID", row.guestID);
 
     if (data) {
@@ -84,4 +86,20 @@ export async function findGuestQR(id) {
   } catch (error) {
     console.error("Error: ", error);
   }
+}
+
+export const sortTableByName = (data) => {};
+
+export function formatedTime(data) {
+  const date = new Date(data);
+
+  const options = {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+
+  return date.toLocaleDateString("en-ID", options);
 }

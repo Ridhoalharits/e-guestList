@@ -152,12 +152,12 @@ const NewGuest = () => {
           </div>
         </div>
 
-        <p className="text-sm font-semibold leading-6 text-gray-900">
+        {/* <p className="text-sm font-semibold leading-6 text-gray-900">
           Apakah Tamu adalah VIP
-        </p>
+        </p> */}
 
-        <div className="mt-6 space-y-6">
-          <div className="flex items-center gap-x-3">
+        <div className=" space-y-6">
+          {/* <div className="flex items-center gap-x-3">
             <input
               id="vip"
               name="isVIP"
@@ -173,8 +173,8 @@ const NewGuest = () => {
             >
               VIP
             </label>
-          </div>
-          <div className="flex items-center gap-x-3">
+          </div> */}
+          {/* <div className="flex items-center gap-x-3">
             <input
               id="non-vip"
               name="isVIP"
@@ -190,7 +190,7 @@ const NewGuest = () => {
             >
               Non-VIP
             </label>
-          </div>
+          </div> */}
         </div>
         <button
           type="submit"

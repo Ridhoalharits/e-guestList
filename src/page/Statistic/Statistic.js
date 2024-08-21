@@ -47,39 +47,39 @@ const Statistic = () => {
 
   return (
     <div className="flex flex-row">
-      <VerticalNavigation />
+      {/* <VerticalNavigation /> */}
 
       <div className="p-4">
         <h1 className="font-xl font-bold">Statistik</h1>
 
         <div className="mb-8 pt-8 flex">
-          <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-64 mr-8">
+          <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-[200px] mr-8">
             <p className="text-slate-600 font-medium">Total Tamu</p>
             <p className="text-5xl font-extrabold text-slate-900 mt-2">
               {data.length}
             </p>
           </div>
-          <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-64 mr-8">
+          <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-[200px] mr-8">
             <p className="text-slate-600 font-medium">Total Sudah Masuk</p>
             <p className="text-5xl font-extrabold text-slate-900 mt-2">
               {udahmasuk}
             </p>
           </div>
-          <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-64">
+          <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-[200px] mr-8">
             <p className="text-slate-600 font-medium">Total Belum Masuk</p>
             <p className="text-5xl font-extrabold text-slate-900 mt-2">
               {belummasuk}
             </p>
           </div>
-        </div>
-        <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-64">
-          <p className="text-slate-600 font-medium">Total Tamu Masuk</p>
-          <p className="text-5xl font-extrabold text-slate-900 mt-2">
-            {jumlah}
-          </p>
+          <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-[200px]">
+            <p className="text-slate-600 font-medium">Total Tamu Masuk</p>
+            <p className="text-5xl font-extrabold text-slate-900 mt-2">
+              {jumlah}
+            </p>
+          </div>
         </div>
 
-        <div className="flex-1 p-4 pr-12">
+        {/* <div className="flex-1 p-4 pr-12">
           <Table
             sx={{ minWidth: 650 }}
             aria-label="simple table"
@@ -152,7 +152,7 @@ const Statistic = () => {
               ))}
             </TableBody>
           </Table>
-        </div>
+        </div> */}
       </div>
     </div>
   );

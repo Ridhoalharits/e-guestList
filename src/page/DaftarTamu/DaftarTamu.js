@@ -10,7 +10,9 @@ import {
   TableHead,
   TableRow,
   Button,
+  Typography,
 } from "@mui/material";
+import { formatedTime } from "../Home/action";
 import { getInvitationList, UpdateCheckIn } from "../Home/action";
 
 const DaftarTamu = () => {
@@ -86,14 +88,48 @@ const DaftarTamu = () => {
           </div>
         </div>
 
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table
+          sx={{ minWidth: 650 }}
+          aria-label="simple table"
+          className="mt-8"
+        >
           <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Guest Category</TableCell>
-              <TableCell>Asal</TableCell>
-              <TableCell>Jabatan/Kota</TableCell>
-              <TableCell>Status</TableCell>
+            <TableRow className="bg-gray-100">
+              <TableCell>
+                <Typography variant="body1" fontWeight="bold">
+                  Name
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="body1" fontWeight="bold">
+                  Guest Category
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="body1" fontWeight="bold">
+                  Instansi / Keluarga
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="body1" fontWeight="bold">
+                  Alamat
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="body1" fontWeight="bold">
+                  Status
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="body1" fontWeight="bold">
+                  Check In Time
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="body1" fontWeight="bold">
+                  Pax
+                </Typography>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -107,21 +143,37 @@ const DaftarTamu = () => {
               >
                 <TableCell>{row.nama}</TableCell>
                 <TableCell>
-                  {row.guestCategory == "VIP" ? (
-                    <p className="mt-1 text-m text-gray-700 bg-yellow-300 p-4 rounded-lg font-bold flex justify-center items-center">
+                  {row.guestCategory === "VIP" ? (
+                    <p className="mt-1 text-m text-gray-700 bg-yellow-300 p-2 rounded-lg font-bold flex justify-center items-center">
                       VIP
                     </p>
                   ) : (
-                    <p className="mt-1 text-m text-gray-700 bg-gray-300 p-4 rounded-lg font-bold flex justify-center items-center">
+                    <p className="mt-1 text-m text-gray-700 bg-gray-300 p-2 rounded-lg font-bold flex justify-center items-center">
                       Non-VIP
                     </p>
                   )}
                 </TableCell>
-                <TableCell>{row.kategori}</TableCell>
-                <TableCell>{row.jabatan_kota}</TableCell>
+                <TableCell>{row.instansiKeluarga}</TableCell>
+                <TableCell>{row.alamat}</TableCell>
                 <TableCell>
-                  {row.isCheckIn == true ? <>Checked In</> : <>Not Check In</>}
+                  {row.isCheckIn === true ? (
+                    <p className="mt-1 text-m text-white bg-red-800 p-2 rounded-lg font-bold flex justify-center items-center">
+                      Checked In
+                    </p>
+                  ) : (
+                    <p className="mt-1 text-m text-white bg-blue-500 p-2 rounded-lg font-bold flex justify-center items-center">
+                      Not Check In
+                    </p>
+                  )}
                 </TableCell>
+                <TableCell>
+                  {row.checkInTime === null ? (
+                    <p>-</p>
+                  ) : (
+                    formatedTime(row.checkInTime)
+                  )}
+                </TableCell>
+                <TableCell>{row.pax}</TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -17,8 +17,8 @@ export const router = createBrowserRouter([
     path: "/daftartamu",
     element: <DaftarTamu />,
   },
-  {
-    path: "/statistic",
-    element: <Statistic />,
-  },
+  // {
+  //   path: "/statistic",
+  //   element: <Statistic />,
+  // },
 ]);
