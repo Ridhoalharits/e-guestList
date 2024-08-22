@@ -31,6 +31,7 @@ const Home = () => {
   const [btnScan, setBtnScan] = useState(true);
   const [scanData, setScanData] = useState(null);
   const [scanResult, setScanResult] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const scanNow = async () => {
     setBtnScan(false); // Scanning starts, so set button state to false
@@ -87,6 +88,10 @@ const Home = () => {
   }, []);
 
   const handleCheckin = async (id, person) => {
+    if (!person) {
+      alert("Masukan Jumlah Tamu");
+      return; // Exit the function if person is not set
+    }
     try {
       await UpdateCheckIn(id, person);
       await fetchData(); // Re-fetch data after updating
@@ -153,7 +158,7 @@ const Home = () => {
               placeholder="Masukan Nama Tamu Undangan"
               autoComplete="email"
               onChange={(e) => handleFindGuest(e.target.value)}
-              className="w-32 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-black shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+              className="w-64 flex-auto rounded-md border-1 bg-white/5 px-3.5 py-2 text-black shadow-sm ring-1 ring-inset ring-black/5 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
             />
             <button
               type="submit"
@@ -241,7 +246,7 @@ const Home = () => {
                     </p>
                   ) : (
                     <p className="mt-1 text-m text-white bg-blue-500 p-2 rounded-lg font-bold flex justify-center items-center">
-                      Not Check In
+                      Not Yet Check In
                     </p>
                   )}
                 </TableCell>
@@ -327,10 +332,16 @@ const Home = () => {
                         Already Check In
                       </p>
                     ) : (
-                      <p className=" text-white  bg-green-500 p-2 rounded-lg font-bold">
+                      <p className=" text-white  bg-blue-500 p-2 rounded-lg font-bold">
                         Not Yet Check In
                       </p>
                     )}
+                  </div>
+                  <div className="flex justify-between gap-5 w-full text-right">
+                    <h4 className="text-gray-500 capitalize">Pax</h4>
+                    <p className=" text-black-100 font-semibold capitalize">
+                      {selectedRow.pax}
+                    </p>
                   </div>
                 </div>
                 <div class="gap-5 w-full text-left mt-4">
@@ -405,10 +416,10 @@ const Home = () => {
                             alt="finish"
                             className="object-contain h-max w-32"
                           />
-                          <h1 className="text-xl font-bold text-green-600 mt-4">
+                          <h1 className="text-xl font-bold text-yellow-400 mt-4">
                             Check In
                           </h1>
-                          <p className="text-lg font-semibold text-green-600">
+                          <p className="text-lg font-semibold ">
                             Apakah anda yakin untuk melakukan Check In?
                           </p>
                         </div>
@@ -429,24 +440,19 @@ const Home = () => {
                             </p>
                           )}
                         </div>
-                        <div className="flex justify-between gap-5 w-full text-right">
-                          <h4 className="text-gray-500 capitalize">Sesi</h4>
-                          <p className="text-black-100 font-semibold capitalize">
-                            {scanResult.sesi}
-                          </p>
-                        </div>
+
                         <div className="flex justify-between gap-5 w-full text-right">
                           <h4 className="text-gray-500 capitalize">
-                            Jabatan / Kota
+                            Instansi / Keluarga
                           </h4>
                           <p className=" text-black-100 font-semibold capitalize">
-                            {scanResult.jabatan_kota}
+                            {scanResult.instansiKeluarga}
                           </p>
                         </div>
                         <div className="flex justify-between gap-5 w-full text-right">
-                          <h4 className="text-gray-500 capitalize">Kategori</h4>
+                          <h4 className="text-gray-500 capitalize">alamat</h4>
                           <p className=" text-black-100 font-semibold capitalize">
-                            {scanResult.kategori}
+                            {scanResult.alamat}
                           </p>
                         </div>
                         <div className="flex justify-between gap-5 w-full text-right">
@@ -462,10 +468,16 @@ const Home = () => {
                               Already Check In
                             </p>
                           ) : (
-                            <p className=" text-white  bg-green-500 p-2 rounded-lg font-bold">
+                            <p className=" text-white  bg-blue-500 p-2 rounded-lg font-bold">
                               Not Yet Check In
                             </p>
                           )}
+                        </div>
+                        <div className="flex justify-between gap-5 w-full text-right">
+                          <h4 className="text-gray-500 capitalize">Pax</h4>
+                          <p className=" text-black-100 font-semibold capitalize">
+                            {scanResult.pax}
+                          </p>
                         </div>
                       </div>
                       <div class="gap-5 w-full text-left mt-4">

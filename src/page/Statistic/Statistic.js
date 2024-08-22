@@ -53,25 +53,19 @@ const Statistic = () => {
         <h1 className="font-xl font-bold">Statistik</h1>
 
         <div className="mb-8 pt-8 flex">
-          <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-[200px] mr-8">
-            <p className="text-slate-600 font-medium">Total Tamu</p>
-            <p className="text-5xl font-extrabold text-slate-900 mt-2">
-              {data.length}
-            </p>
-          </div>
-          <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-[200px] mr-8">
-            <p className="text-slate-600 font-medium">Total Sudah Masuk</p>
+          <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-[250px] mr-8">
+            <p className="text-slate-600 font-medium">Total Undangan Masuk</p>
             <p className="text-5xl font-extrabold text-slate-900 mt-2">
               {udahmasuk}
             </p>
           </div>
-          <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-[200px] mr-8">
+          {/* <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-[200px] mr-8">
             <p className="text-slate-600 font-medium">Total Belum Masuk</p>
             <p className="text-5xl font-extrabold text-slate-900 mt-2">
               {belummasuk}
             </p>
-          </div>
-          <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-[200px]">
+          </div> */}
+          <div className="bg-white p-6  rounded-lg shadow-md border border-slate-300 flex flex-col items-center justify-center w-[250px]">
             <p className="text-slate-600 font-medium">Total Tamu Masuk</p>
             <p className="text-5xl font-extrabold text-slate-900 mt-2">
               {jumlah}

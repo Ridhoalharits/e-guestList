@@ -117,6 +117,11 @@ const DaftarTamu = () => {
               </TableCell>
               <TableCell>
                 <Typography variant="body1" fontWeight="bold">
+                  Tamu Dari
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="body1" fontWeight="bold">
                   Status
                 </Typography>
               </TableCell>
@@ -155,6 +160,7 @@ const DaftarTamu = () => {
                 </TableCell>
                 <TableCell>{row.instansiKeluarga}</TableCell>
                 <TableCell>{row.alamat}</TableCell>
+                <TableCell>{row.relasi}</TableCell>
                 <TableCell>
                   {row.isCheckIn === true ? (
                     <p className="mt-1 text-m text-white bg-red-800 p-2 rounded-lg font-bold flex justify-center items-center">

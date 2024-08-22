@@ -101,5 +101,5 @@ export function formatedTime(data) {
     minute: "2-digit",
   };
 
-  return date.toLocaleDateString("en-ID", options);
+  return date.toLocaleDateString("en-US", options);
 }
