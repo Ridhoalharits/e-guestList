@@ -9,7 +9,7 @@ const NewGuest = () => {
   const [Name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [Origin, setOrigin] = useState("");
-  const [relation, setRelation] = useState("TAMU ORTU CPP");
+  const [relation, setRelation] = useState("");
 
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
@@ -46,10 +46,10 @@ const NewGuest = () => {
     console.log("New Guest:", newGuest);
     newguest(newGuest);
     setSuccessMessage("Data successfully added!");
-    setTimeout(() => {
-      setSuccessMessage("");
-      navigate("/"); // Redirect to home page after 3 seconds
-    }, 500);
+    // setTimeout(() => {
+    //   setSuccessMessage("");
+    //   navigate("/"); // Redirect to home page after 3 seconds
+    // }, 500);
     // Call your function to submit the form data
     // submitForm(newGuest);
   };
@@ -57,11 +57,11 @@ const NewGuest = () => {
     <div className="flex flex-row">
       <VerticalNavigation />
       <div className="p-8 ml-8">
-        {successMessage && (
+        {/* {successMessage && (
           <div className="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 px-4 py-2 bg-green-500 text-white rounded">
             {successMessage}
           </div>
-        )}
+        )} */}
         <div className="mb-8">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             Informasi Tamu

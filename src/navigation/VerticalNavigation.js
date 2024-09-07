@@ -1,12 +1,13 @@
 import React from "react";
 import { createClient } from "@supabase/supabase-js";
 import { Link } from "react-router-dom";
+import { signOut } from "./action";
 
 const VerticalNavigation = () => {
-  const supabase = createClient(
-    "https://jweftjgelrutfoerznmb.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp3ZWZ0amdlbHJ1dGZvZXJ6bm1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTM0MjYyMjMsImV4cCI6MjAyOTAwMjIyM30.PGKnIzXI1T4YQVfNqxuOnL7cASslx40XOZJc0UHtDZo"
-  );
+  // const supabase = createClient(
+  //   "https://jweftjgelrutfoerznmb.supabase.co",
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp3ZWZ0amdlbHJ1dGZvZXJ6bm1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTM0MjYyMjMsImV4cCI6MjAyOTAwMjIyM30.PGKnIzXI1T4YQVfNqxuOnL7cASslx40XOZJc0UHtDZo"
+  // );
 
   const navLink = [
     {
@@ -25,16 +26,10 @@ const VerticalNavigation = () => {
       icon: "http://www.w3.org/2000/svg",
       link: "/newguest",
     },
-    // {
-    //   name: "Statistic",
-    //   icon: "http://www.w3.org/2000/svg",
-    //   link: "/statistic",
-    // },
   ];
 
-  async function signOut() {
-    const { error } = await supabase.auth.signOut();
-    if (error) console.log("Error signing out:", error.message);
+  async function handleSignOut() {
+    signOut();
   }
 
   return (
@@ -47,7 +42,7 @@ const VerticalNavigation = () => {
       <nav className="flex flex-col gap-1">
         {navLink.map((item) => (
           <Link key={item.name} to={item.link}>
-            <div className="mt-3 flex p-3 rounded-md items-center hover:bg-slate-400 ease-in duration-100">
+            <div className="mt-3 flex p-3 rounded-md items-center hover:bg-slate-400 ease-in duration-100 ">
               <svg
                 xmlns={item.icon}
                 viewBox="0 0 24 24"
@@ -66,7 +61,7 @@ const VerticalNavigation = () => {
           </Link>
         ))}
         <div
-          onClick={signOut}
+          onClick={handleSignOut}
           role="button"
           className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
         >

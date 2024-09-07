@@ -32,10 +32,14 @@ const Home = () => {
   const [scanData, setScanData] = useState(null);
   const [scanResult, setScanResult] = useState(null);
   const [errors, setErrors] = useState({});
+  const [dataDisplay, setDataDisplay] = useState([]);
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  const totalValuePage = 10;
 
   const scanNow = async () => {
     setBtnScan(false); // Scanning starts, so set button state to false
     stopScan = false; // Ensure scanning is active
+
     await new Promise((r) => setTimeout(r, 100));
     const videoElement = document.getElementById("scanView");
     const scanner = new QrScanner(
@@ -68,6 +72,7 @@ const Home = () => {
       const data = await findGuest(name);
 
       setInvitationList(data);
+      setDataDisplay(data.slice(0, totalValuePage));
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +91,12 @@ const Home = () => {
     fetchData();
     console.log(invitationList);
   }, []);
+
+  useEffect(() => {
+    const start = (currentPageNumber - 1) * totalValuePage;
+    const end = currentPageNumber * totalValuePage;
+    setDataDisplay(invitationList.slice(start, end));
+  }, [currentPageNumber]);
 
   const handleCheckin = async (id, person) => {
     if (!person) {
@@ -138,6 +149,18 @@ const Home = () => {
   const handleQRClose = () => {
     setQrOpen(false);
     stopScan = true; // Stop scanning when dialog is closed
+  };
+
+  const goOnPrevPage = () => {
+    if (currentPageNumber === 1) return;
+    setCurrentPageNumber((prev) => prev - 1);
+  };
+  const goOnNextPage = () => {
+    if (currentPageNumber === invitationList.length / totalValuePage) return;
+    setCurrentPageNumber((prev) => prev + 1);
+  };
+  const handleSelectChange = (e) => {
+    setCurrentPageNumber(e.target.value);
   };
   console.log("ini hasil", invitationList);
   return (
@@ -217,7 +240,7 @@ const Home = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {invitationList.map((row) => (
+            {dataDisplay.map((row) => (
               <TableRow
                 key={row.id}
                 hover
@@ -261,6 +284,14 @@ const Home = () => {
             ))}
           </TableBody>
         </Table>
+        <div className="gap-4">
+          <button onClick={goOnPrevPage} className="bg-slate-400 p-4">
+            Prev
+          </button>
+          <button onClick={goOnNextPage} className="bg-yellow-400 p-4">
+            Next
+          </button>
+        </div>
 
         <Dialog
           open={open}

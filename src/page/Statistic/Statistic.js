@@ -1,5 +1,5 @@
 import React from "react";
-import VerticalNavigation from "../../navigation/VerticalNavigation";
+
 import { useState, useEffect } from "react";
 import {
   getAdditionalList,
@@ -30,20 +30,20 @@ const Statistic = () => {
   const jumlah = getTotalPax(data);
   const [additionalList, setAdditionalList] = useState([]);
 
-  const fetchData = async () => {
-    try {
-      const data = await getAdditionalList();
+  // const fetchData = async () => {
+  //   try {
+  //     const data = await getAdditionalList();
 
-      setAdditionalList(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
+  //     setAdditionalList(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
-  console.log(fetchData);
+  // console.log(fetchData);
 
   return (
     <div className="flex flex-row">
