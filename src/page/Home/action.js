@@ -1,5 +1,4 @@
 import { createClient } from "@supabase/supabase-js";
-import { format } from "date-fns";
 export async function getInvitationList() {
   const supabase = createClient(
     "https://jweftjgelrutfoerznmb.supabase.co",
